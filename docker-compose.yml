@@ -1,9 +1,0 @@
-version: "3.3"
-
-services:
-  caddy:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        CADDY_VERSION: v1.0.4

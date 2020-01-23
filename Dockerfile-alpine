@@ -11,11 +11,16 @@ RUN git clone --branch  ${CADDY_VERSION} https://github.com/mholt/caddy mholt/ca
 # clone builder
 RUN git clone https://github.com/caddyserver/caddy  caddyserver/caddy
 
-COPY index.html index.html
-
-# build caddy
-RUN cd mholt/caddy/caddy \
-    && go get ./... 
+RUN mkdir -p /var/www/html
+COPY index.html /var/www/html/index.html
 
 #Disable Caddy Telemetry
-RUN sed -i '27i\ caddymain.EnableTelemetry = false' main.go
+RUN sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /root/mholt/caddy/caddy/caddymain/run.go
+
+# build caddy
+WORKDIR /root/mholt/caddy/caddy
+RUN go install
+
+RUN cp $GOPATH/bin/caddy /usr/local/bin/
+
+WORKDIR /var/www/html

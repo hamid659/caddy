@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Scipt to build a docker image
+#Script to build caddy binary using ubuntu base image
 
 if [[ -n "$1" ]]
         then
