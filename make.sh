@@ -12,6 +12,6 @@ if [[ -n "$1" ]]
     fi
 
 BUILD_ARG="--build-arg CADDY_VERSION=${CADDY_VERSION}"
-IMAGE_NAME="caddy"
+IMAGE_NAME="caddy:${CADDY_VERSION}"
 
 docker build -t ${IMAGE_NAME} ${BUILD_ARG} . 

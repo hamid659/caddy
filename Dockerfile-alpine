@@ -1,0 +1,21 @@
+FROM golang:1.13-alpine
+
+ARG CADDY_VERSION
+
+# install git
+RUN apk add --no-cache git
+
+# clone caddy
+RUN git clone --branch  ${CADDY_VERSION} https://github.com/mholt/caddy mholt/caddy 
+
+# clone builder
+RUN git clone https://github.com/caddyserver/caddy  caddyserver/caddy
+
+COPY index.html index.html
+
+# build caddy
+RUN cd mholt/caddy/caddy \
+    && go get ./... 
+
+#Disable Caddy Telemetry
+RUN sed -i '27i\ caddymain.EnableTelemetry = false' main.go
