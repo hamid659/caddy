@@ -14,19 +14,13 @@ ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 RUN apt-get install wget git -y
 
 # Install go
-RUN wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
-RUN tar -xvf go1.13.3.linux-amd64.tar.gz
+RUN wget https://dl.google.com/go/go1.13.6.linux-amd64.tar.gz
+RUN tar -xvf go1.13.6.linux-amd64.tar.gz
 RUN mv go /usr/local
 
 ENV GOROOT /usr/local/go
 ENV GOPATH $HOME/go
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
-
-#RUN echo "export GOROOT=/usr/local/go" >> $HOME/.bashrc
-#RUN echo "export GOPATH=$HOME/go" >> $HOME/.bashrc
-#RUN echo "export PATH=$PATH:/usr/local/go/bin" >> $HOME/.bashrc
-#RUN . ~/.bashrc
-
 
 # clone caddy
 RUN git clone --branch  ${CADDY_VERSION} https://github.com/mholt/caddy /root/mholt/caddy 
@@ -48,7 +42,7 @@ RUN cp $GOPATH/bin/caddy /usr/local/bin/
 
 #copy caddy binary to host
 RUN mkdir -p /docker-host
-VOLUME /tmp/docker /docker-host
+VOLUME /tmp/build_output/ /docker-host/
 RUN cp $GOPATH/bin/caddy /docker-host/ 
 
 WORKDIR /var/www/html

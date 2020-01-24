@@ -14,4 +14,7 @@ if [[ -n "$1" ]]
 BUILD_ARG="--build-arg CADDY_VERSION=${CADDY_VERSION}"
 IMAGE_NAME="caddy:${CADDY_VERSION}"
 
+#Creating a temp directory to mount to the container
+mkdir -p  /tmp/build_output
+
 docker build -t ${IMAGE_NAME} ${BUILD_ARG} . 

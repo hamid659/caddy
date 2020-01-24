@@ -18,6 +18,5 @@ IMAGE_NAME="alpine-caddy:${CADDY_VERSION}"
 docker build -t ${IMAGE_NAME} ${BUILD_ARG} -f Dockerfile-alpine . 
 
 # Start caddy container
-docker run -d --name caddy \
- -p 8080:2015 \
- -i {$IMAGE_NAME} caddy
+
+eval "docker run --name caddy -d -p 8080:2015 -i ${IMAGE_NAME} caddy"

@@ -6,16 +6,16 @@ ARG CADDY_VERSION
 RUN apk add --no-cache git
 
 # clone caddy
-RUN git clone --branch  ${CADDY_VERSION} https://github.com/mholt/caddy mholt/caddy 
+RUN git clone --branch  ${CADDY_VERSION} https://github.com/mholt/caddy $HOME/mholt/caddy 
 
 # clone builder
-RUN git clone https://github.com/caddyserver/caddy  caddyserver/caddy
+RUN git clone https://github.com/caddyserver/caddy  $HOME/caddyserver/caddy
 
 RUN mkdir -p /var/www/html
 COPY index.html /var/www/html/index.html
 
 #Disable Caddy Telemetry
-RUN sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /root/mholt/caddy/caddy/caddymain/run.go
+RUN sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' $HOME/mholt/caddy/caddy/caddymain/run.go
 
 # build caddy
 WORKDIR /root/mholt/caddy/caddy
