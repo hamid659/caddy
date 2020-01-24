@@ -17,3 +17,5 @@
 - You can pin to a particular Caddy commit with passing the caddy version to each script
 - Both scripts Use latest stable version of Go from https://golang.org/dl/ to compile.
 
+## prerequisite
+ - Docker version 19.03.5
